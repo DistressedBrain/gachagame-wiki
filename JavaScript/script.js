@@ -33,76 +33,79 @@ async function fetchSubredditData(subName) {
     const cleanSub = subName.trim().toLowerCase();
     if (!cleanSub) throw new Error('Empty subreddit name');
 
-    const aboutUrl = `https://www.reddit.com/r/${cleanSub}/about.json`;
-    const aboutRes = await fetch(aboutUrl);
-    if (!aboutRes.ok) {
-        if (aboutRes.status === 404) throw new Error(`r/${cleanSub} not found`);
-        throw new Error(`HTTP ${aboutRes.status}`);
-    }
-    const aboutData = await aboutRes.json();
-    const subData = aboutData.data;
-    if (!subData) throw new Error('Invalid data');
-
-    const hotUrl = `https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`;
-    const hotRes = await fetch(hotUrl);
-    let hotPosts = [];
-    if (hotRes.ok) {
-        const hotJson = await hotRes.json();
-        hotPosts = hotJson.data?.children || [];
+    
+    const CORS_PROXY = 'https://corsproxy.io/?';
+    
+    async function fetchWithProxy(url) {
+        const response = await fetch(CORS_PROXY + encodeURIComponent(url));
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
     }
 
-    const displayName = subData.display_name_prefixed || `r/${cleanSub}`;
-    const subscribers = subData.subscribers || 0;
-    let activeUsers = subData.active_user_count;
-    if (activeUsers === undefined || activeUsers === null) {
-        activeUsers = subData.accounts_active;
+    try {
+       
+        const aboutData = await fetchWithProxy(`https://www.reddit.com/r/${cleanSub}/about.json`);
+        const subData = aboutData.data;
+        if (!subData) throw new Error('Invalid data');
+
+        let hotPosts = [];
+        try {
+            const hotData = await fetchWithProxy(`https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`);
+            hotPosts = hotData.data?.children || [];
+        } catch (e) {
+            console.warn(`Could not fetch hot posts for ${cleanSub}:`, e);
+        }
+
+        const displayName = subData.display_name_prefixed || `r/${cleanSub}`;
+        const subscribers = subData.subscribers || 0;
+        let activeUsers = subData.active_user_count;
         if (activeUsers === undefined || activeUsers === null) {
-            activeUsers = Math.floor(Math.random() * 120) + 5;
-        }
-    }
-
-    let description = subData.public_description || subData.description || "";
-    if (!description || description === "") {
-        description = "A Reddit community. No description provided.";
-    }
-
-    const communityIcon = subData.community_icon || subData.icon_img || null;
-    const createdDate = new Date(subData.created_utc * 1000).toLocaleDateString(undefined, { year: 'numeric', month: 'short' });
-
-
-    let bannerUrl = subData.banner_background_image ||
-        subData.banner_img ||
-        subData.mobile_banner_image ||
-        null;
-
-
-    if (bannerUrl) {
-        if (bannerUrl.startsWith('//')) {
-            bannerUrl = 'https:' + bannerUrl;
-        }
-        if (bannerUrl.startsWith('/')) {
-            bannerUrl = 'https://www.reddit.com' + bannerUrl;
+            activeUsers = subData.accounts_active;
+            if (activeUsers === undefined || activeUsers === null) {
+                activeUsers = Math.floor(Math.random() * 120) + 5;
+            }
         }
 
-        bannerUrl = bannerUrl.split('?')[0];
+        let description = subData.public_description || subData.description || "";
+        if (!description || description === "") {
+            description = "A Reddit community. No description provided.";
+        }
+
+        const communityIcon = subData.community_icon || subData.icon_img || null;
+        const createdDate = new Date(subData.created_utc * 1000).toLocaleDateString(undefined, { year: 'numeric', month: 'short' });
+
+        let bannerUrl = subData.banner_background_image ||
+                        subData.banner_img ||
+                        subData.mobile_banner_image ||
+                        null;
+
+        if (bannerUrl) {
+            if (bannerUrl.startsWith('//')) bannerUrl = 'https:' + bannerUrl;
+            if (bannerUrl.startsWith('/')) bannerUrl = 'https://www.reddit.com' + bannerUrl;
+            bannerUrl = bannerUrl.split('?')[0];
+        }
+
+        const postsPreview = hotPosts.slice(0, 2).map(post => {
+            const p = post.data;
+            return { title: p.title || 'Untitled', ups: p.ups || 0 };
+        });
+
+        return {
+            displayName,
+            subscribers,
+            activeUsers,
+            description,
+            iconUrl: communityIcon,
+            createdDate,
+            postsPreview,
+            subName: cleanSub,
+            bannerUrl: bannerUrl
+        };
+        
+    } catch (err) {
+        console.error(`Error fetching r/${cleanSub}:`, err);
+        throw err;
     }
-
-    const postsPreview = hotPosts.slice(0, 2).map(post => {
-        const p = post.data;
-        return { title: p.title || 'Untitled', ups: p.ups || 0 };
-    });
-
-    return {
-        displayName,
-        subscribers,
-        activeUsers,
-        description,
-        iconUrl: communityIcon,
-        createdDate,
-        postsPreview,
-        subName: cleanSub,
-        bannerUrl: bannerUrl
-    };
 }
 
 // Escape utilities
