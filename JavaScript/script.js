@@ -27,12 +27,14 @@ const SUBREDDITS_TO_SHOW = [
 ];
 const cardsGrid = document.getElementById('cardsGrid');
 
-// Fetch Reddit data from Reddit API
 async function fetchSubredditData(subName) {
     const cleanSub = subName.trim().toLowerCase();
     if (!cleanSub) throw new Error('Empty subreddit name');
 
-    const aboutUrl = `https://www.reddit.com/r/${cleanSub}/about.json`;
+    
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const aboutUrl = `${proxyUrl}https://www.reddit.com/r/${cleanSub}/about.json`;
+    
     const aboutRes = await fetch(aboutUrl);
     if (!aboutRes.ok) {
         if (aboutRes.status === 404) throw new Error(`r/${cleanSub} not found`);
@@ -42,7 +44,8 @@ async function fetchSubredditData(subName) {
     const subData = aboutData.data;
     if (!subData) throw new Error('Invalid data');
 
-    const hotUrl = `https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`;
+
+    const hotUrl = `${proxyUrl}https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`;
     const hotRes = await fetch(hotUrl);
     let hotPosts = [];
     if (hotRes.ok) {
@@ -50,15 +53,8 @@ async function fetchSubredditData(subName) {
         hotPosts = hotJson.data?.children || [];
     }
 
-    const displayName = subData.display_name_prefixed || `r/${cleanSub}`;
-    const subscribers = subData.subscribers || 0;
-    let activeUsers = subData.active_user_count;
-    if (activeUsers === undefined || activeUsers === null) {
-        activeUsers = subData.accounts_active;
-        if (activeUsers === undefined || activeUsers === null) {
-            activeUsers = Math.floor(Math.random() * 120) + 5;
-        }
-    }
+    
+}
 
     let description = subData.public_description || subData.description || "";
     if (!description || description === "") {
