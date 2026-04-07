@@ -32,7 +32,7 @@ async function fetchSubredditData(subName) {
     if (!cleanSub) throw new Error('Empty subreddit name');
 
     
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const proxyUrl = 'https://api.allorigins.win/raw?url=';
     const aboutUrl = `${proxyUrl}https://www.reddit.com/r/${cleanSub}/about.json`;
     
     const aboutRes = await fetch(aboutUrl);
