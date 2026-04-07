@@ -27,6 +27,7 @@ const SUBREDDITS_TO_SHOW = [
 ];
 const cardsGrid = document.getElementById('cardsGrid');
 
+// Fetch Reddit data from Reddit API
 async function fetchSubredditData(subName) {
     const cleanSub = subName.trim().toLowerCase();
     if (!cleanSub) throw new Error('Empty subreddit name');
@@ -102,6 +103,7 @@ async function fetchSubredditData(subName) {
         bannerUrl: bannerUrl
     };
 }
+
 // Escape utilities
 function escapeHtml(str) {
     if (!str) return '';
