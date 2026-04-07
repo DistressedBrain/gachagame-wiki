@@ -31,10 +31,7 @@ async function fetchSubredditData(subName) {
     const cleanSub = subName.trim().toLowerCase();
     if (!cleanSub) throw new Error('Empty subreddit name');
 
-    
-    const proxyUrl = 'https://api.allorigins.win/raw?url=';
     const aboutUrl = `${proxyUrl}https://www.reddit.com/r/${cleanSub}/about.json`;
-    
     const aboutRes = await fetch(aboutUrl);
     if (!aboutRes.ok) {
         if (aboutRes.status === 404) throw new Error(`r/${cleanSub} not found`);
@@ -44,14 +41,14 @@ async function fetchSubredditData(subName) {
     const subData = aboutData.data;
     if (!subData) throw new Error('Invalid data');
 
-
-    const hotUrl = `${proxyUrl}https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`;
+    const hotUrl = `https://www.reddit.com/r/${cleanSub}/hot.json?limit=2`;
     const hotRes = await fetch(hotUrl);
     let hotPosts = [];
     if (hotRes.ok) {
         const hotJson = await hotRes.json();
         hotPosts = hotJson.data?.children || [];
     }
+
     const displayName = subData.display_name_prefixed || `r/${cleanSub}`;
     const subscribers = subData.subscribers || 0;
     let activeUsers = subData.active_user_count;
@@ -105,7 +102,6 @@ async function fetchSubredditData(subName) {
         bannerUrl: bannerUrl
     };
 }
-
 // Escape utilities
 function escapeHtml(str) {
     if (!str) return '';
