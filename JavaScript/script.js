@@ -10,7 +10,7 @@ const SUBREDDITS_TO_SHOW = [
     "AlphardMains",
     "AdlerMains",
     "BaicangMains",
-    "DaffodilMains",
+    "DaffodillMains",
     "ElfideMains",
     "FadiaMains",
     "HanielMains",
