@@ -1,5 +1,5 @@
 const SUBREDDITS_TO_SHOW = [
-    "DokkiMains",
+    //"DokkiMains",
     "NanallyMains",
     "HathorMains",
     "ElfideMains",
