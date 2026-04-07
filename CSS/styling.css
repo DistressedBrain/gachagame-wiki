@@ -27,7 +27,7 @@ body {
 }
 
 .title-area h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     background: linear-gradient(135deg, #f0f3ff, #a0b3f0);
     background-clip: text;
@@ -233,7 +233,7 @@ body {
 .error-tag {
     padding: 0.8rem;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
 }
 
 .error-tag {
