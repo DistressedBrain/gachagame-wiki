@@ -245,7 +245,7 @@ body {
 }
 
 .card-body {
-    padding-top: 0.6rem;
+    padding-top: 0.4rem;
 }
 
 @media (max-width: 1400px) {
