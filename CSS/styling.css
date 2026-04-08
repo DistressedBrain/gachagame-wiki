@@ -38,7 +38,7 @@ body {
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.8rem;
+    gap: 1.5rem;
 }
 
 .subreddit-card {
@@ -61,6 +61,14 @@ body {
     box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6);
 }
 
+.subreddit-card {
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.subreddit-card:active {
+    transform: scale(0.98);
+}
 
 .card-content {
     flex: 1;
@@ -71,12 +79,15 @@ body {
     gap: 0.85rem;
 }
 
+
+
+
 .description-preview {
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     color: #cbd5ff;
     line-height: 1.45;
     background: rgba(0, 0, 0, 0.25);
-    padding: 0.3rem 0.4rem;
+    padding: 0.6rem 0.7rem;
     border-radius: 0.8rem;
     border-left: 2px solid #ff6a4b;
     max-height: 85px;
@@ -89,6 +100,8 @@ body {
     color: #aabbff;
     margin-bottom: 6px;
 }
+
+
 
 
 .card-header-row {
@@ -119,7 +132,7 @@ body {
 }
 
 .subreddit-name {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #f0f4ff;
     line-height: 1.3;
@@ -157,6 +170,7 @@ body {
 }
 
 
+
 .description-preview a {
     color: #8fabff;
     text-decoration: none;
@@ -171,6 +185,7 @@ body {
     border-radius: 0.8rem;
     padding: 0.5rem;
 }
+
 
 .post-line {
     color: #d1deff;
@@ -246,17 +261,21 @@ body {
     padding-top: 0.8rem;
 }
 
-@media (min-width: 1800px) {
-    .dashboard {
-        max-width: 1600px;
-        margin: 0 auto;
+@media (max-width: 1400px) {
+    .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.2rem;
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1050px) {
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.2rem;
+        gap: 1rem;
+    }
+
+    body {
+        padding: 1.2rem;
     }
 }
 
@@ -265,6 +284,14 @@ body {
         grid-template-columns: 1fr;
     }
 
+    .dashboard-header {
+        padding: 1rem 1.2rem;
+    }
+
+    .title-area h1 {
+        font-size: 1.8rem;
+    }
+}
 
     .title-area h1 {
         font-size: 1.8rem;
