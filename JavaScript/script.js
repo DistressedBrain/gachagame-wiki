@@ -29,6 +29,7 @@ const SUBREDDITS_TO_SHOW = [
     "KuharaMains",
     "jinMains",
     "RabbitMains",
+    "LingKoMains",
     //"AureliaMains"
 ];
 const cardsGrid = document.getElementById('cardsGrid');
