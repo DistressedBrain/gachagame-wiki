@@ -35,9 +35,8 @@ async function fetchSubredditData(subName) {
     const cleanSub = subName.trim().toLowerCase();
     if (!cleanSub) throw new Error('Empty subreddit name');
 
-    
     const CORS_PROXY = 'https://reddit-worker.walther-pranz.workers.dev/?url=';
-    
+
     async function fetchWithProxy(url) {
         const response = await fetch(CORS_PROXY + encodeURIComponent(url));
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -45,7 +44,6 @@ async function fetchSubredditData(subName) {
     }
 
     try {
-       
         const aboutData = await fetchWithProxy(`https://www.reddit.com/r/${cleanSub}/about.json`);
         const subData = aboutData.data;
         if (!subData) throw new Error('Invalid data');
@@ -77,9 +75,9 @@ async function fetchSubredditData(subName) {
         const createdDate = new Date(subData.created_utc * 1000).toLocaleDateString(undefined, { year: 'numeric', month: 'short' });
 
         let bannerUrl = subData.banner_background_image ||
-                        subData.banner_img ||
-                        subData.mobile_banner_image ||
-                        null;
+            subData.banner_img ||
+            subData.mobile_banner_image ||
+            null;
 
         if (bannerUrl) {
             if (bannerUrl.startsWith('//')) bannerUrl = 'https:' + bannerUrl;
@@ -103,7 +101,7 @@ async function fetchSubredditData(subName) {
             subName: cleanSub,
             bannerUrl: bannerUrl
         };
-        
+
     } catch (err) {
         console.error(`Error fetching r/${cleanSub}:`, err);
         throw err;
@@ -146,7 +144,9 @@ function createCardElement(subredditName) {
     cardDiv.className = 'subreddit-card';
     cardDiv.style.cursor = 'pointer';
 
+    // Add click listener to redirect to subreddit
     cardDiv.addEventListener('click', function (e) {
+        // Don't redirect if someone clicked a link inside the card
         if (e.target.tagName === 'A') {
             return;
         }
@@ -158,6 +158,7 @@ function createCardElement(subredditName) {
             <div class="loading-spinner">⏳ Loading r/${escapeHtml(subredditName)} ...</div>
         </div>
     `;
+
     populateCard(cardDiv, subredditName);
     return cardDiv;
 }
@@ -174,7 +175,6 @@ async function populateCard(cardElement, subredditName) {
 
         const avatarHtml = getAvatarHtml(data.iconUrl);
         const linkedDescription = linkify(data.description);
-
 
         const bannerStyle = data.bannerUrl
             ? `background-image: url('${escapeHtmlAttr(data.bannerUrl)}'); background-size: cover; background-position: center;`
@@ -200,7 +200,6 @@ async function populateCard(cardElement, subredditName) {
         if (displayDesc.length > 180) {
             displayDesc = displayDesc.substring(0, 177) + '...';
         }
-
 
         contentDiv.innerHTML = `
             <div class="card-banner-area" style="${bannerStyle}">
@@ -236,7 +235,6 @@ async function populateCard(cardElement, subredditName) {
     }
 }
 
-
 function renderAllSubreddits() {
     cardsGrid.innerHTML = '';
 
@@ -256,7 +254,6 @@ function renderAllSubreddits() {
     });
 }
 
-// Initialize
 renderAllSubreddits();
-console.log("✅ 4-column grid ready — edit SUBREDDITS_TO_SHOW array to add/remove subreddits");
+console.log("✅ 3-column grid ready — click any card to go to subreddit");
 console.log("Current subreddits:", SUBREDDITS_TO_SHOW);
