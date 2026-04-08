@@ -144,11 +144,20 @@ function linkify(text) {
 function createCardElement(subredditName) {
     const cardDiv = document.createElement('div');
     cardDiv.className = 'subreddit-card';
+    cardDiv.style.cursor = 'pointer';
+
+    cardDiv.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+            return;
+        }
+        window.open(`https://www.reddit.com/r/${subredditName}`, '_blank');
+    });
+
     cardDiv.innerHTML = `
-            <div class="card-content">
-                <div class="loading-spinner">⏳ Loading r/${escapeHtml(subredditName)} ...</div>
-            </div>
-        `;
+        <div class="card-content">
+            <div class="loading-spinner">⏳ Loading r/${escapeHtml(subredditName)} ...</div>
+        </div>
+    `;
     populateCard(cardDiv, subredditName);
     return cardDiv;
 }
