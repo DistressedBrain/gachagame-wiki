@@ -172,14 +172,6 @@ body {
     padding: 0.5rem;
 }
 
-/*.hot-post-preview>div:first-child {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #aabbff;
-    margin-bottom: 4px;
-    letter-spacing: 0.3px;
-}*/
-
 .post-line {
     color: #d1deff;
     font-size: 0.9rem;
@@ -261,7 +253,6 @@ body {
     }
 }
 
-/* Tablet: 2 cards per row */
 @media (max-width: 1000px) {
     .cards-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -269,7 +260,6 @@ body {
     }
 }
 
-/* Mobile: 1 card per row */
 @media (max-width: 680px) {
     .cards-grid {
         grid-template-columns: 1fr;
