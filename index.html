@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GachaGame.wiki</title>
+<link rel="stylesheet" href="CSS/index.css">
+</head>
+<body>
+
+<!-- ===================================================================
+     HEADER
+=================================================================== -->
+<header>
+  <a class="logo" href="/">GachaGame<span>.wiki</span></a>
+  <nav>
+    <a href="#featured">Games</a>
+    <a href="#news">News</a>
+    <a href="#footer">Contact</a>
+  </nav>
+</header>
+
+<!-- ===================================================================
+     CAROUSEL
+=================================================================== -->
+<section class="hero" id="hero">
+
+  <!-- Slides get injected here -->
+  <div class="slides" id="slides"></div>
+
+  <!-- Big left/right arrows for the hero -->
+  <button class="hero-arrow left"  id="heroPrev" aria-label="Previous">&#10094;</button>
+  <button class="hero-arrow right" id="heroNext" aria-label="Next">&#10095;</button>
+
+  <!-- Progress dots (bottom-left) -->
+  <div class="dots" id="dots"></div>
+
+  <div class="strip" id="strip">
+    <div class="strip-counter" id="stripCounter">01 / 01</div>
+    <div class="strip-viewport">
+      <div class="strip-track" id="stripTrack"></div>
+    </div>
+    <button class="strip-arrow up"   id="stripPrev" aria-label="Previous game">&#10094;</button>
+    <button class="strip-arrow down" id="stripNext" aria-label="Next game">&#10095;</button>
+    <div class="strip-next" id="stripNextLabel">NEXT</div>
+  </div>
+
+</section>
+
+<!-- ===================================================================
+     SECTION 2 — FEATURED WIKIS
+=================================================================== -->
+<section class="band" id="featured">
+  <div class="band-inner">
+    <div class="eyebrow">// Featured</div>
+    <h2 class="band-title">Game Wikis</h2>
+      Logos/Ananta.png
+    <div class="feature-grid">
+      <a class="feature-card" href="https://nte.gachagame.wiki">
+        <div class="feature-thumb" data-img="Logos/NTE.jpg">NtE</div>
+        <div class="feature-meta">
+          <h3>Neverness to Everness</h3>
+          <p>Maps, characters, banners and guides.</p>
+        </div>
+      </a>
+
+      <a class="feature-card" href="https://ananta.gachagame.wiki">
+        <div class="feature-thumb" data-img="Logos/Ananta.png">Ananta</div>
+        <div class="feature-meta">
+          <h3>Ananta</h3>
+          <p>Characters, Maps, and guides.</p>
+        </div>
+      </a>
+
+      <a class="feature-card" href="https://varsapura.gachagame.wiki">
+        <div class="feature-thumb" data-img="Logos/varsapura.jpg">Varsapura</div>
+        <div class="feature-meta">
+          <h3>Varsapura</h3>
+          <p>A city of rain inspired by Singapore.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================================================================
+     SECTION 3 — NEWS 
+=================================================================== -->
+<section class="band alt" id="news">
+  <div class="band-inner">
+    <div class="eyebrow">// Latest</div>
+    <h2 class="band-title">Coming Soon</h2>
+      
+    <div class="news-grid">
+      <a class="news-card" href="#">
+          <div class="news-thumb" data-img="">Coming Soon</div>
+        <div class="news-info">
+          <span class="news-date">2026-06-01</span>
+          <h3>Placeholder</h3>
+        </div>
+      </a>
+      <a class="news-card" href="#">
+        <div class="news-thumb" data-img="">Coming Soon</div>
+        <div class="news-info">
+          <span class="news-date">2026-06-02</span>
+          <h3>Placeholder</h3>
+        </div>
+      </a>
+      <a class="news-card" href="#">
+          <div class="news-thumb">Coming Soon</div>
+        <div class="news-info">
+          <span class="news-date">2026-06-03</span>
+          <h3>Placeholder</h3>
+        </div>
+      </a>
+      <a class="news-card" href="#">
+          <div class="news-thumb">Coming Soon</div>
+        <div class="news-info">
+          <span class="news-date">2026-06-04</span>
+          <h3>Placeholder</h3>
+        </div>
+      </a>
+    </div>
+
+    <a class="more-btn" href="#">More news</a>
+  </div>
+</section>
+
+<!-- ===================================================================
+     FOOTER  legal / IP / contact
+=================================================================== -->
+<footer id="footer">
+    <a class="logo" href="/">GachaGame<span>.wiki</span></a>
+
+    <nav class="footer-links">
+        <a href="#">Terms of Service</a>
+        <span class="sep">|</span>
+        <a href="#">Privacy Policy</a>
+        <span class="sep">|</span>
+        <a href="#">Contact Us</a>
+    </nav>
+
+    <!-- age-rating block or extras -->
+    <div class="rating-box">
+        PLACEHOLDER RATING<br>
+        Add ESRB / PEGI / age-rating info here.
+    </div>
+
+    <p class="legal">
+        All game titles, logos and related media are trademarks and/or copyrights of their
+        respective owners. GachaGame.wiki is a fan-made informational site and is not affiliated
+        with or endorsed by any of the featured game publishers or developers unless otherwise stated.
+    </p>
+
+    <!-- <p class="copyright">&copy; 2026 GachaGame.wiki. All rights reserved.</p>-->
+</footer>
+
+<script src="JavaScript/index.js"></script>
+</body>
+</html>
