@@ -1,0 +1,66 @@
+.header {
+    margin: 0px;
+    max-width: 1600px;
+}
+
+.header-header {
+    font-family: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue';
+    min-height: 100vh;
+    padding: 1, 4em;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    position: center;
+}
+
+.game-item data {
+    z-index: 1;
+    border-radius: var(--radius-system);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    background-color: #1f1f1f87;
+    flex-flow: column;
+    width: 23rem;
+    min-width: 23rem;
+    max-width: 23rem;
+    height: auto;
+    padding-bottom: .8rem;
+    display: flex;
+}
+
+.game-header.preview {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 31;
+    translate: -24.8px 40px;
+    rotate: none;
+    scale: none;
+    transform: translate(0px, 0px);
+}
+
+.game-content.preview {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 2.5rem;
+    padding: 1.8rem 1.8rem 2.2rem;
+    border: 1px solid rgba(176, 167, 167, 0.141);
+    transition: box-shadow 0.3s;
+}
+
+
+.footer {
+    height: 4.4vw;
+}
+
+.footer {
+    display: table-cell;
+    vertical-align: middle;
+    float: left;
+
+}

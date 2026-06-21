@@ -1,0 +1,252 @@
+/* ===================================================================
+   GachaGame.wiki — index.css
+=================================================================== */
+:root{
+  --bg:#0d0e10;
+  --bg2:#141619;
+  --accent:#f7d51d;
+  --text:#f5f5f5;
+  --muted:#9aa0a6;
+  --border:#262a2f;
+  --header-h:60px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Segoe UI',system-ui,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ===================== HEADER ===================== */
+header{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 30px;
+  background:rgba(13,14,16,.8);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  z-index:100;
+}
+.logo{font-weight:800;font-size:1.35rem;letter-spacing:.5px;}
+.logo span{color:var(--accent);}
+header nav a{margin-left:26px;font-size:.85rem;font-weight:600;color:var(--text);transition:color .2s;}
+header nav a:hover{color:var(--accent);}
+
+/* ===================== HERO ===================== */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;
+  min-height:560px;
+  overflow:hidden;
+}
+.slides{position:absolute;inset:0;}
+
+.slide{
+  position:absolute;inset:0;
+  display:flex;align-items:center;
+  opacity:0;visibility:hidden;
+  transition:opacity .7s ease;
+}
+.slide.active{opacity:1;visibility:visible;}
+
+/* Background layer (image / video / gradient) set inline by JS */
+.slide-bg{
+  position:absolute;inset:0;z-index:0;
+  background:linear-gradient(135deg,#1a1c20,#3a1c22);
+  background-size:cover;background-position:center;
+}
+.slide-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+/* Readability gradient over the art */
+.slide-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.45) 45%,rgba(0,0,0,0) 80%);
+}
+.slide-content{
+  position:relative;z-index:2;
+  max-width:620px;
+  padding:0 60px;
+  margin-top:var(--header-h);
+}
+.slide-tag{
+  display:inline-block;
+  background:var(--accent);color:#000;
+  font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:4px 11px;margin-bottom:16px;
+}
+.slide-content h1{font-size:2.9rem;font-weight:800;line-height:1.1;margin-bottom:14px;}
+.slide-content p{color:#d7d9dc;font-size:1rem;max-width:540px;}
+.slide-content .visit{
+  display:inline-block;margin-top:22px;
+  border:1px solid var(--accent);color:var(--accent);
+  font-weight:700;font-size:.85rem;letter-spacing:.5px;
+  padding:10px 22px;transition:background .2s,color .2s;
+}
+.slide-content .visit:hover{background:var(--accent);color:#000;}
+
+/* arrows */
+.hero-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:46px;height:46px;border:none;border-radius:50%;
+  background:rgba(255,255,255,.08);color:#fff;
+  font-size:1.3rem;cursor:pointer;z-index:20;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s;
+}
+.hero-arrow:hover{background:var(--accent);color:#000;}
+.hero-arrow.left{left:18px;}
+.hero-arrow.right{right:18px;}
+
+/* Progress dots */
+.dots{position:absolute;left:60px;bottom:34px;display:flex;gap:8px;z-index:20;}
+.dot{width:30px;height:3px;background:rgba(255,255,255,.25);cursor:pointer;transition:background .2s;}
+.dot.active{background:var(--accent);}
+
+/* ===================== BOTTOM-RIGHT FILMSTRIP ===================== */
+.strip{
+  position:absolute;
+  right:24px;bottom:28px;
+  z-index:30;
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  max-width:min(640px,70vw);
+}
+.strip-counter{
+  font-size:.65rem;font-weight:700;letter-spacing:1px;
+  color:rgba(255,255,255,.6);
+  white-space:nowrap;
+}
+.strip-next{
+  font-size:.6rem;font-weight:700;letter-spacing:1px;
+  color:rgba(255,255,255,.45);
+  white-space:nowrap;
+}
+.strip-viewport{overflow:hidden;max-width:430px;}
+.strip-track{
+  display:flex;gap:8px;
+  transition:transform .4s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+}
+
+/* A tile = a game logo, links to its subdomain */
+.strip-tile{
+  flex:0 0 auto;
+  position:relative;
+  width:150px;height:84px;            /* 16:9 */
+  overflow:hidden;border-radius:4px;
+  opacity:.5;
+  transform:scale(.9);
+  outline:2px solid transparent;outline-offset:-2px;
+  transition:opacity .3s,transform .3s,outline-color .3s;
+}
+.strip-tile img{width:100%;height:100%;object-fit:cover;}
+/* Fallback look when a logo image is missing */
+.strip-tile .ph{
+  width:100%;height:100%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2a2d31,#1c1e22);
+  color:var(--muted);font-size:.75rem;font-weight:700;text-align:center;padding:6px;
+}
+.strip-tile .label{
+  position:absolute;left:0;right:0;bottom:0;
+  background:linear-gradient(to top,rgba(0,0,0,.85),transparent);
+  color:#fff;font-size:.62rem;font-weight:700;
+  padding:14px 6px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.strip-tile .bar{
+  position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.strip-tile.active{opacity:1;transform:scale(1);outline-color:var(--accent);}
+.strip-tile.active .bar{transform:scaleX(1);}
+
+.strip-arrow{
+  flex:0 0 auto;
+  width:30px;height:30px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(255,255,255,.12);color:#fff;
+  font-size:.8rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.strip-arrow:hover{background:var(--accent);border-color:var(--accent);color:#000;}
+
+/* ===================== FULL-WIDTH BANDS (sections 2 & 3) ===================== */
+.band{width:100%;padding:70px 0;background:var(--bg2);}
+.band.alt{background:var(--bg);}
+.band-inner{max-width:1200px;margin:0 auto;padding:0 40px;}
+.eyebrow{color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;}
+.band-title{font-size:2rem;font-weight:800;padding-bottom:18px;margin-bottom:28px;border-bottom:1px solid var(--border);}
+
+/* Featured wikis grid */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.feature-card{
+  background:#1b1d21;border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.feature-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+.feature-thumb{
+  height:150px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2a2d31,#1c1e22);
+  background-size:cover;background-position:center;
+  color:var(--muted);font-weight:700;
+}
+.feature-meta{padding:16px 18px 20px;}
+.feature-meta h3{font-size:1.05rem;margin-bottom:6px;}
+.feature-meta p{color:var(--muted);font-size:.85rem;}
+
+/* News grid */
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;}
+.news-card{
+  background:#1b1d21;border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.news-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+.news-thumb{
+  height:150px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2a2d31,#1c1e22);
+  color:var(--muted);font-size:.85rem;
+}
+.news-info{padding:15px 16px 18px;}
+.news-date{color:var(--muted);font-size:.72rem;}
+.news-info h3{font-size:.98rem;margin-top:6px;line-height:1.4;}
+
+.more-btn{
+  display:inline-block;margin-top:30px;
+  background:var(--accent);color:#000;font-weight:700;font-size:.85rem;letter-spacing:.5px;
+  padding:11px 26px;border-radius:4px;transition:opacity .2s;
+}
+.more-btn:hover{opacity:.85;}
+
+/* ===================== FOOTER ===================== */
+footer{background:#000;border-top:1px solid var(--border);text-align:center;padding:48px 30px 32px;}
+footer .logo{font-size:1.5rem;display:inline-block;margin-bottom:22px;}
+.footer-links{margin-bottom:22px;font-size:.85rem;}
+.footer-links a{font-weight:600;transition:color .2s;}
+.footer-links a:hover{color:var(--accent);}
+.footer-links .sep{color:#444;margin:0 14px;}
+.rating-box{
+  display:inline-block;border:1px solid #4a4a4a;color:var(--muted);
+  font-size:.7rem;line-height:1.5;padding:10px 16px;margin-bottom:22px;
+}
+.legal{max-width:720px;margin:0 auto 14px;color:var(--muted);font-size:.74rem;line-height:1.6;}
+.copyright{color:#555;font-size:.72rem;}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:760px){
+  .slide-content{padding:0 24px;}
+  .slide-content h1{font-size:1.9rem;}
+  .strip{right:12px;bottom:16px;gap:6px;padding:6px;}
+  .strip-viewport{max-width:200px;}
+  .strip-tile{width:110px;height:62px;}
+  .strip-next{display:none;}
+  .dots{left:24px;bottom:90px;}
+  .band{padding:50px 0;}
+  .band-inner{padding:0 22px;}
+}
