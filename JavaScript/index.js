@@ -21,7 +21,7 @@ const GAMES = [
     tag:  "Update",
     desc: "An open-world action RPG by Hotta Studio. Play as an Appraiser exploring the city of Hethereau and fighting hostile forces.",
     logo: "/Logos/NTE.jpg",
-    bg:   "mp4/nte_bgvideo.mp4"
+    bg:   "/mp4/nte_bgvideo.mp4"
   },
   {
     name: "Ananta",
