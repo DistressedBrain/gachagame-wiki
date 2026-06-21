@@ -29,7 +29,7 @@ const GAMES = [
     tag:  "",
     desc: "An open world game like GTA VI by NakedRain.Play as an Agent doing comissions or just exploring the city and doing many side gigs and getting more followers on social media.",
     logo: "Logos/Ananta.png",
-    bg:   "/mp4/ananta.mp4"
+    bg:   "/mp4/ananta1.mp4"
   },
   {
     name: "Varsapura",
