@@ -1,0 +1,109 @@
+/* ===================================================================
+   privacy.css  —  EXTENDS index.css
+   Load order:  <link index.css>  then  <link privacy.css>
+   Recreates the dark→maroon hero gradient from the carousel slide
+   (index.css .slide-bg + its readability overlay) as a full-page bg.
+=================================================================== */
+
+.policy-body {
+    /* same two-layer look as the hero: dark-left fading to maroon-right,
+       over a 135deg dark→burgundy base */
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.45) 50%, rgba(0,0,0,0) 85%),
+        linear-gradient(135deg, #1a1c20 0%, #3a1c22 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-top: var(--header-h);
+}
+
+/* ===== HERO ===== */
+.policy-hero {
+    padding: 90px 60px 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.policy-hero .eyebrow {
+    color: var(--accent);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.policy-hero h1 {
+    font-size: 2.9rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+}
+
+.policy-hero .updated {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+/* ===== BODY ===== */
+.policy-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px 60px 100px;
+}
+
+.policy-disclaimer {
+    background: rgba(0,0,0,.45);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 20px;
+    color: var(--muted);
+    font-size: .85rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+.policy-content section { margin-bottom: 34px; }
+
+.policy-content h2 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.policy-content h2 .num {
+    color: var(--accent);
+    margin-right: 10px;
+    font-size: .95rem;
+}
+
+.policy-content p {
+    color: #d7d9dc;
+    font-size: .92rem;
+    line-height: 1.7;
+    max-width: 760px;
+    margin-bottom: 10px;
+}
+
+.policy-content ul {
+    margin: 6px 0 10px 22px;
+    max-width: 760px;
+}
+
+.policy-content li {
+    color: #d7d9dc;
+    font-size: .92rem;
+    line-height: 1.7;
+    margin-bottom: 4px;
+}
+
+.policy-content a { color: var(--accent); }
+.policy-content a:hover { text-decoration: underline; }
+
+@media (max-width: 760px) {
+    .policy-hero { padding: 70px 24px 40px; }
+    .policy-hero h1 { font-size: 1.9rem; }
+    .policy-content { padding: 10px 24px 70px; }
+}

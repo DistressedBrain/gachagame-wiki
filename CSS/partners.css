@@ -1,0 +1,92 @@
+/* ===================================================================
+   partners.css  —  EXTENDS index.css
+   Load order:  <link index.css>  then  <link partners.css>
+   Everything below builds on the shared tokens (--bg, --accent, etc.)
+   and the .band / .feature-card styles defined in index.css.
+=================================================================== */
+
+/* The partners page has no full-height hero, so push content below
+   the fixed 60px header. */
+body { padding-top: var(--header-h); }
+
+/* Intro line under the band title */
+.band-intro {
+    color: var(--muted);
+    font-size: .95rem;
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* ===== CATEGORY BADGE on the card image ===== */
+.feature-thumb { position: relative; }
+
+.partner-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--accent);
+    color: #000;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+/* ===== LINK LABEL inside the card body ===== */
+.feature-link {
+    display: inline-block;
+    margin-top: 12px;
+    color: var(--accent);
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+.feature-card:hover .feature-link { text-decoration: underline; }
+
+/* ===== BECOME A PARTNER banner ===== */
+.cta-section {
+    background: #1b1d21;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 34px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.cta-section h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.cta-section p {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.cta-btn {
+    flex-shrink: 0;
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 4px;
+    font-size: .9rem;
+    letter-spacing: .5px;
+    white-space: nowrap;
+    transition: opacity .2s;
+}
+
+.cta-btn:hover { opacity: .85; }
+
+@media (max-width: 760px) {
+    .cta-section { padding: 26px 24px; }
+}
